@@ -1,0 +1,43 @@
+{
+  "name": "second-hand-land",
+  "version": "1.0.0",
+  "description": "Fullstack e-learning platform using React + Express",
+  "author": "Nguyen Trung An",
+  "contributors": [
+    "Nguyen Vu Quoc An",
+    "Tran Gia Kiet",
+    "Phan Hoang Kien",
+    "Le Quoc Kiet",
+    "Tran Huynh Ha Lam",
+    "Nguyen Huy Luong"
+  ],
+  "keywords": [
+    "React",
+    "Express",
+    "MongoDB",
+    "Node.js",
+    "Vite",
+    "E-learning"
+  ],
+  "license": "MIT",
+  "postinstall": "npm install --prefix client && npm install --prefix server",
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write ."
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Trung4n/tutor-support-system.git"
+  },
+  "devDependencies": {
+    "eslint": "^9.38.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "prettier": "^3.6.2"
+  }
+}
