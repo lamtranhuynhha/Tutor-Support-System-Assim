@@ -1,5 +1,5 @@
 import { User } from "../models/user.model.js";
-import { AppError } from "@tss/utils/AppError";
+import { AppError } from "@shared/utils/AppError";
 
 export const authService = {
   async login({ username, password }) {
