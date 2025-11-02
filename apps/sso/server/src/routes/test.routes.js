@@ -1,6 +1,7 @@
 import express from "express";
 // import { MailService } from "../services/mail.service.js";
-// import { generateOtp } from "../utils/generateOtp.js";
+import { generateOtp } from "../utils/generateOtp.js";
+import { MailService } from "@tss/notifications/service";
 const router = express.Router();
 
 router.get("/ping", (req, res) => {
@@ -28,6 +29,11 @@ router.get("/logout", (req, res, next) => {
     res.clearCookie("connect.sid");
     return res.status(200).json({ msg: "Logged out" });
   });
+});
+
+router.get("/send-otp", async (req, res) => {
+  await MailService.sendOtp("nguyentrungan4993@gmail.com", generateOtp());
+  res.json({ msg: "OTP sent" });
 });
 
 export default router;

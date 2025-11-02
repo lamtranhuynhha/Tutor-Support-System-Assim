@@ -16,4 +16,6 @@ export const env = {
   SESSION_SECRET: process.env.SESSION_SECRET,
   NATS_URL: process.env.NATS_SERVER,
   NATS_STREAM: process.env.NATS_STREAM,
+  EMAIL_USER: process.env.EMAIL_USER,
+  EMAIL_PASS: process.env.EMAIL_PASS,
 };

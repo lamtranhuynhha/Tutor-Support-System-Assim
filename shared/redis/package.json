@@ -5,6 +5,7 @@
   "private": true,
   "exports": {
     "./service": "./service.js",
-    "./session": "./session.js"
+    "./session": "./session.js",
+    "./client": "./client.js"
   }
 }

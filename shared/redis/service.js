@@ -1,4 +1,4 @@
-import redis from "..config/redis.js";
+import redis from "./client.js";
 
 export const RedisService = {
   async set(key, value, ttl = null) {

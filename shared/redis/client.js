@@ -1,6 +1,6 @@
 import { createClient } from "redis";
 import { logger } from "../utils/logger.js";
-import { env } from "./env.js";
+import { env } from "../config/env.js";
 
 const redis = createClient({
   socket: {
