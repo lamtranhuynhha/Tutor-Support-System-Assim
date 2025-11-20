@@ -29,13 +29,13 @@ export const MailService = {
     }
   },
 
-  sendOtp(email, otp) {
+  sendToken(email, token) {
     return this.sendTemplate({
       from: `"Central Authentication Service" <${env.EMAIL_USER}>`,
       to: email,
       subject: "Your Verification Code",
       template: "verifyOtp.hbs",
-      data: { otp },
+      data: { otk },
     });
   },
 

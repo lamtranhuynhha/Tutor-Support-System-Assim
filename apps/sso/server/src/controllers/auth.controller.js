@@ -5,18 +5,20 @@ import { env } from "../config/env.js";
 
 export const login = asyncHandler(async (req, res) => {
   // YOUR CODE HERE
-  //--------------test test----------------
-  const username = req.body.username;
-  const password = req.body.password;
-  const valid = await authService.login({ username, password });
-  if (valid) res.status(200).json({ message: "" });
-  return res.status(400).json({ message: "" });
-  // --------------------------------------
+  // param = redirect
+  // return param
 });
 
 export const changePassword = asyncHandler(async (req, res) => {
   // YOUR CODE HERE
 });
+
+// FE: mail, username -> api/send-token (data)
+// BE: sendToken: check username (in db) and mail (send mail), create token, redis(token, username), req.sub.username, send mail (http://localhost:4002/reset-password?token={token}), return 200
+// FE: please check your mail
+// User check mail: click link http://localhost:4002/reset-password?token={token}
+// FE: pw, confirm pw -> api/reset-password (new pw)
+// BE: resetPw: token in param, check token in redis, change pw, delete token, return 200
 
 export const resetPassword = asyncHandler(async (req, res) => {
   const username = req.body.username;
@@ -41,8 +43,6 @@ export const resetPassword = asyncHandler(async (req, res) => {
 export const resetPasswordToken = asyncHandler(async (req, res) => {
   const token = req.params.token;
   const { username, newpassword } = req.body;
-  console.log(newpassword);
-  console.log(token);
 
   // Verify extrated Token
   const verified = await tokenService.verifyToken(token);
@@ -57,6 +57,7 @@ export const resetPasswordToken = asyncHandler(async (req, res) => {
   return res.status(400).json({ message: "User not found" });
 });
 
+// delete session
 export const logout = asyncHandler(async (req, res) => {
   // YOUR CODE HERE
 });
