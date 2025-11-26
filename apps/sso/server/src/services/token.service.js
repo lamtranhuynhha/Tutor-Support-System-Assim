@@ -1,6 +1,5 @@
 import redis from "@shared/redis/client";
 import { generateOtp } from "../utils/generateOtp.js";
-import jwt from "jsonwebtoken";
 import crypto from "crypto";
 import { env } from "../config/env.js";
 
