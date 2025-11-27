@@ -1,6 +1,4 @@
 import express from "express";
-// import { MailService } from "../services/mail.service.js";
-import { generateOtp } from "../utils/generateOtp.js";
 import { MailService } from "@shared/notifications/service";
 const router = express.Router();
 
@@ -31,8 +29,11 @@ router.get("/logout", (req, res, next) => {
   });
 });
 
-router.get("/send-otp", async (req, res) => {
-  await MailService.sendOtp("nguyentrungan4993@gmail.com", generateOtp());
+router.get("/send-token", async (req, res) => {
+  await MailService.sendToken("nguyentrungan4993@gmail.com", {
+    username: "an123",
+    resetLink: "http://localhost:4002/reset-password?token=an123",
+  });
   res.json({ msg: "OTP sent" });
 });
 

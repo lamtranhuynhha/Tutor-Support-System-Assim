@@ -2,20 +2,20 @@
 import http from "http";
 import { createApp } from "./app.js";
 import { connectDB, disconnectDB } from "@shared/config/db";
-import { natsWrapper } from "@shared/nats/wrapper";
-import { Subjects } from "@shared/nats/subjects";
+// import { natsWrapper } from "@shared/nats/wrapper";
+// import { Subjects } from "@shared/nats/subjects";
 import { logger } from "@shared/utils/logger";
 import { env } from "./config/env.js";
 
 const bootstrap = async () => {
   await connectDB(env.MONGO_URI);
-  await natsWrapper.connect(env.SERVICE_NAME);
-  await natsWrapper.subscribeJetStream({
-    stream: env.NATS_STREAM,
-    consumer: env.NATS_CONSUMER,
-    filter: Subjects.UserCreated,
-    deliver: env.NATS_DELIVERY,
-  });
+  // await natsWrapper.connect(env.SERVICE_NAME);
+  // await natsWrapper.subscribeJetStream({
+  //   stream: env.NATS_STREAM,
+  //   consumer: env.NATS_CONSUMER,
+  //   filter: Subjects.UserCreated,
+  //   deliver: env.NATS_DELIVERY,
+  // });
   const app = createApp();
   const server = http.createServer(app);
 

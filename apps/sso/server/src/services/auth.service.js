@@ -1,66 +1,45 @@
 import { User } from "../models/user.model.js";
 import { AppError } from "@shared/utils/AppError";
-import bcrypt from "bcryptjs";
 
-export const authService = {
+export const AuthService = {
   async login({ username, password }) {
     const user = await User.findOne({ username });
 
-    if (!user) {throw new AppError("Invalid credentials", 401);}
+    if (!user || !user.isActive) {
+      throw new AppError("Wrong password or username", 401);
+    }
 
     const isPasswordValid = await user.comparePassword(password);
 
-    if (!user.isActive && isPasswordValid){
-      user.isActive = true;
+    if (isPasswordValid) {
       user.failedLoginCount = 0;
       await user.save();
-    }
-
-    if (!isPasswordValid) {
+    } else {
       user.failedLoginCount += 1;
       if (user.failedLoginCount >= 3) {
         user.isActive = false;
-        await user.save();
-        throw new AppError("Too many failed attempts. Account locked", 423);
       }
       await user.save();
-      const remainingAttempts = 3 - user.failedLoginCount;
-      throw new AppError(`Wrong password. ${remainingAttempts} attempts remaining.`, 401);
+      throw new AppError("Wrong password or username", 401);
     }
 
-    if (user.failedLoginCount > 0) {
-      user.failedLoginCount = 0;
-      user.isActive = true;
-      await user.save();
-    }
-
-    const userData = user.toObject();
-    delete userData.password;
-    delete userData.failedLoginCount;
-
-    return { user: userData };    
+    return { id: user._id, role: user.role };
   },
 
-  async changePassword({ username, currentpassword, newpassword }) {
+  async changePassword({ username, currentPassword, newPassword }) {
     const user = await User.findOne({ username });
-    console.log(currentpassword);
-    if (!user) throw new AppError("User Not Found", 404);
-    if (!(await user.comparePassword(currentpassword)))
-      throw new AppError("Current Password do not match", 400);
 
-    user.password = newpassword;
+    if (!user || !(await user.comparePassword(currentPassword)))
+      throw new AppError("Wrong password or username", 400);
+
+    user.password = newPassword;
     await user.save();
+  },
 
-    return user;
-  },
-  async checkUserExists(username) {
+  async resetPassword({ username, newPassword }) {
     const user = await User.findOne({ username });
-    return user;
-  },
-  async resetPassword({ username, newpassword }) {
-    const user = await User.findOne({ username });
-    user.password = newpassword;
+    if (!user) throw new AppError("User not found", 404);
+    user.password = newPassword;
     user.save();
-    return user;
   },
 };

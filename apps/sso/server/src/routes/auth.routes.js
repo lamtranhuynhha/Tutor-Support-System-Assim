@@ -6,12 +6,11 @@ import {
   sendToken,
   resetPassword,
 } from "../controllers/auth.controller.js";
-import { validateLogin } from "../middlewares/validate.middleware.js";
 
 export const router = Router();
 
 // DEFINE ROUTES HERE
-router.post("/login", validateLogin, login);
+router.post("/login", login);
 
 router.post("/logout", logout);
 
