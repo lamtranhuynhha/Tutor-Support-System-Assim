@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
   {
-    userID: {
+    userId: {
       // MSSV or MSCB
       type: String,
       required: true,
@@ -22,6 +22,7 @@ const userSchema = new mongoose.Schema(
     },
     mail: {
       type: String,
+      unique: true,
       required: true,
     },
     name: {

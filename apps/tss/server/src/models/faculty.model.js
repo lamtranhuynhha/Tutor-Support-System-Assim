@@ -7,6 +7,12 @@ const facultySchema = new mongoose.Schema({
     unique: true,
     trim: true,
   },
+  abbreviation: {
+    type: String,
+    required: true,
+    unique: true,
+    trim: true,
+  },
 });
 
 export const Faculty = mongoose.model("Faculty", facultySchema);

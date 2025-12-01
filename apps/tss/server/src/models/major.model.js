@@ -6,6 +6,12 @@ const majorSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
+  abbreviation: {
+    type: String,
+    required: true,
+    unique: true,
+    trim: true,
+  },
   faculty: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Faculty",
