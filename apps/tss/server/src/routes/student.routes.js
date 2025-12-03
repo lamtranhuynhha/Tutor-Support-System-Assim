@@ -1,5 +1,11 @@
 import { Router } from "express";
-// import {} from "../controllers/student.controller.js";
+import {
+  getStudent,
+  updateStudent,
+  getAllStudents,
+  getStudentEnrollments,
+  getStudentSessions,
+} from "../controllers/student.controller.js";
 
 export const router = Router();
 
@@ -9,4 +15,8 @@ export const router = Router();
 // router.put("/:id",updateStudent);
 // router.get("/list",getAllStudents);
 // Ex: api/student/list?page=1&limit=10&search=abc&sort=asc&....
-// if query params not provided, use default values in controller (recommended)
+router.get("/:id", getStudent);
+router.put("/:id", updateStudent);
+
+router.get("/:id/enrollments", getStudentEnrollments);
+router.get("/:id/sessions", getStudentSessions);
