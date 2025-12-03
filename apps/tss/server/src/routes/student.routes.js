@@ -2,7 +2,6 @@ import { Router } from "express";
 import {
   getStudent,
   updateStudent,
-  getAllStudents,
   getStudentEnrollments,
   getStudentSessions,
 } from "../controllers/student.controller.js";
